@@ -1,0 +1,719 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="JS,JavaScript,基础知识,数据类型," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="ECMAScirpt 变量有两种不同的数据类型：基本类型，引用类型。也有其他的叫法，比如原始类型和对象类型。这些叫法都是依据这两种的类型特点来命名的。
+基本类型
+基本的数据类型有：undefined，boolean，number，string，null.基本类型的访问是按值访问的，就是说你可以操作保存在变量中的实际的值。基本类型有以下几个特点：(typeof null 输出object  因为nu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript复习(二)数据类型">
+<meta property="og:url" content="https://marsqinht.github.io/2016/05/07/datatype/index.html">
+<meta property="og:site_name" content="Mars' Blog">
+<meta property="og:description" content="ECMAScirpt 变量有两种不同的数据类型：基本类型，引用类型。也有其他的叫法，比如原始类型和对象类型。这些叫法都是依据这两种的类型特点来命名的。
+基本类型
+基本的数据类型有：undefined，boolean，number，string，null.基本类型的访问是按值访问的，就是说你可以操作保存在变量中的实际的值。基本类型有以下几个特点：(typeof null 输出object  因为nu">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/599584-cce8e155e19593fb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://segmentfault.com/img/bVlRSw">
+<meta property="og:image" content="https://segmentfault.com/img/bVlSaN">
+<meta property="og:image" content="https://segmentfault.com/img/bVlSc9">
+<meta property="og:updated_time" content="2017-03-02T09:56:49.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript复习(二)数据类型">
+<meta name="twitter:description" content="ECMAScirpt 变量有两种不同的数据类型：基本类型，引用类型。也有其他的叫法，比如原始类型和对象类型。这些叫法都是依据这两种的类型特点来命名的。
+基本类型
+基本的数据类型有：undefined，boolean，number，string，null.基本类型的访问是按值访问的，就是说你可以操作保存在变量中的实际的值。基本类型有以下几个特点：(typeof null 输出object  因为nu">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/599584-cce8e155e19593fb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 7566230,
+      author: 'Author'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://marsqinht.github.io/2016/05/07/datatype/"/>
+
+  <title> JavaScript复习(二)数据类型 | Mars' Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s6.cnzz.com/stat.php?id=1261020784&web_id=1261020784" type="text/javascript"></script>
+  </div>
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+    
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader" style="background-image: url('/images/bg3.jpg');">
+      <div class="header-inner"><a class="site-home" href="/">Mars' Blog</a>
+
+<div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <div href="/"  class="brand">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Mars' Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </div>
+  </div>
+  <p class="site-subtitle">做一个充满好奇心的Geek</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+      <div class="header-post"> 
+  <div class="post-header">
+      <div class="tags">
+      
+        <a href="/tags/JS/" rel="tag" title="JS">JS</a>
+      
+        <a href="/tags/JavaScript/" rel="tag" title="JavaScript">JavaScript</a>
+      
+        <a href="/tags/基础知识/" rel="tag" title="基础知识">基础知识</a>
+      
+        <a href="/tags/数据类型/" rel="tag" title="数据类型">数据类型</a>
+      
+      </div>
+      <h1>JavaScript复习(二)数据类型</h1>
+      <h2 class="subtitle"></h2>
+      <div class="post-time">
+        <span class="post-meta-item-text">Posted on </span>
+        <time itemprop="dateCreated" datetime="2016-05-07T17:46:06+08:00" content="2016-05-07" title="2016-05-07 17:46:06">
+          2016-05-07
+        </time>
+      </div>
+  </div>
+ </div>
+    </header>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                JavaScript复习(二)数据类型
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-05-07T17:46:06+08:00" content="2016-05-07">
+              2016-05-07
+            </time>
+          </span>
+
+          
+
+          <!-- 
+            
+           -->
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>ECMAScirpt 变量有两种不同的数据类型：<code>基本类型</code>，<code>引用类型</code>。也有其他的叫法，比如<code>原始类型</code>和<code>对象类型</code>。这些叫法都是依据这两种的类型特点来命名的。</p>
+<h2 id="基本类型"><a href="#基本类型" class="headerlink" title="基本类型"></a>基本类型</h2><hr>
+<p>基本的数据类型有：<code>undefined</code>，<code>boolean</code>，<code>number</code>，<code>string</code>，<code>null</code>.基本类型的访问是<code>按值</code>访问的，就是说你可以操作保存在变量中的实际的值。基本类型有以下几个特点：<br>(<code>typeof null</code> 输出<code>object</code>  因为null本质上是也是<code>对象</code>只是指向了<code>空指针</code>)</p>
+<h3 id="值不可变"><a href="#值不可变" class="headerlink" title="值不可变"></a>值不可变</h3><p>任何方法都无法改变一个基本类型的值，比如一个字符串:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> name = <span class="string">'jay'</span>;</div><div class="line"><span class="built_in">console</span>.log(name.toUpperCase()); <span class="comment">// 输出 'JAY'</span></div><div class="line"><span class="built_in">console</span>.log(name); <span class="comment">// 输出  'jay'</span></div></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>无法添加属性值或者方法；<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> person = <span class="string">'Mars'</span>;</div><div class="line">person.age = <span class="number">24</span>;</div><div class="line">person.method = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="comment">//...&#125;;</span></div><div class="line"><span class="built_in">console</span>.log(person.age); <span class="comment">// undefined</span></div><div class="line"><span class="built_in">console</span>.log(person.method); <span class="comment">// undefined</span></div></pre></td></tr></table></figure></p>
+<h3 id="基本类型的比较是值的比较："><a href="#基本类型的比较是值的比较：" class="headerlink" title="基本类型的比较是值的比较："></a>基本类型的比较是值的比较：</h3><p>只有在它们的值相等的时候它们才相等。 但你可能会这样：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</div><div class="line"><span class="keyword">var</span> b = <span class="literal">true</span>;</div><div class="line"><span class="built_in">console</span>.log(a == b);<span class="comment">//true</span></div><div class="line"><span class="built_in">console</span>.log(a === b);<span class="comment">//false</span></div></pre></td></tr></table></figure></p>
+<p><code>==</code>比较两个不同类型的变量时会进行一些<code>类型转换</code>。像上面的比较先会把true转换为数字1再和数字1进行比较，结果就是true了。 这是当比较的两个值的类型不同的时候==运算符会进行<code>类型转换</code>，但是当两个值的类型相同的时候，即使是<code>==</code>也相当于是<code>===</code>。当<code>===</code>全等时不进行类型转换，1是<code>number</code>类型自然不全等于<code>布尔</code>类型的true了</p>
+<h3 id="基本类型的变量是存放在栈区的（栈区指内存里的栈内存）"><a href="#基本类型的变量是存放在栈区的（栈区指内存里的栈内存）" class="headerlink" title="基本类型的变量是存放在栈区的（栈区指内存里的栈内存）"></a>基本类型的变量是存放在栈区的（栈区指内存里的栈内存）</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a =<span class="number">20</span>;</div><div class="line"><span class="keyword">var</span> b =abc;</div><div class="line"><span class="keyword">var</span> c =truel;</div></pre></td></tr></table></figure>
+<p><img src="http://upload-images.jianshu.io/upload_images/599584-cce8e155e19593fb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="堆与栈"></p>
+<h2 id="引用类型"><a href="#引用类型" class="headerlink" title="引用类型"></a>引用类型</h2><p><code>引用类型</code>也可以说是<code>对象</code>，对象是<code>属性</code>和<code>方法</code>的集合。也就是说引用类型可以拥有属性和方法，属性又可以包含<code>基本类型</code>和<code>引用类型</code>。来看看引用类型的一些特性：</p>
+<h3 id="引用类型的值是可变的"><a href="#引用类型的值是可变的" class="headerlink" title="引用类型的值是可变的"></a>引用类型的值是可变的</h3><p>我们可为为引用类型添加属性和方法，也可以删除其属性和方法，如：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> person = &#123;&#125;;<span class="comment">//创建个控对象 --引用类型</span></div><div class="line">person.name = <span class="string">'jay'</span>;</div><div class="line">person.age = <span class="number">24</span>;</div><div class="line">person.sayName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="built_in">console</span>.log(person.name);&#125; </div><div class="line">person.sayName();<span class="comment">// 'jay'</span></div><div class="line"></div><div class="line"><span class="keyword">delete</span> person.name; <span class="comment">//删除person对象的name属性</span></div><div class="line">person.sayName(); <span class="comment">// undefined</span></div></pre></td></tr></table></figure></p>
+<p>上面代码说明引用类型可以拥有属性和方法，并且是可以动态改变的。</p>
+<h3 id="引用类型的值是同时保存在栈内存和堆内存中的对象"><a href="#引用类型的值是同时保存在栈内存和堆内存中的对象" class="headerlink" title="引用类型的值是同时保存在栈内存和堆内存中的对象"></a>引用类型的值是同时保存在栈内存和堆内存中的对象</h3><p><code>javascrip</code>和其他语言不同，其不允许直接访问内存中的位置，也就是说不能直接操作对象的<code>内存空间</code>，那我们操作啥呢？ 实际上，是操作对象的引用，所以引用类型的值是按<code>引用</code>访问的。<br>准确地说，引用类型的存储需要内存的<code>栈区</code>和<code>堆区</code>（堆区是指内存里的堆内存）共同完成，栈区内存保存变量标识符和指向堆内存中该对象的指针，也可以说是该对象在堆内存的地址。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> d = &#123;<span class="attr">m</span>:<span class="number">20</span>&#125;</div></pre></td></tr></table></figure>
+<h3 id="引用类型的比较是引用的比较"><a href="#引用类型的比较是引用的比较" class="headerlink" title="引用类型的比较是引用的比较"></a>引用类型的比较是引用的比较</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> person1 = &#123;&#125;;</div><div class="line"><span class="keyword">var</span> person2 = &#123;&#125;;</div><div class="line"><span class="built_in">console</span>.log(person1 == person2); <span class="comment">// false</span></div></pre></td></tr></table></figure>
+<p>引用类型时按引用访问的，换句话说就是比较两个对象的堆内存中的地址是否相同，那很明显，person1和person2在堆内存中地址是不同的.<br><img src="https://segmentfault.com/img/bVlRSw" alt=""><br>所以这两个是完全不同的对象，所以返回false;</p>
+<h2 id="基本类型的赋值与对象的引用"><a href="#基本类型的赋值与对象的引用" class="headerlink" title="基本类型的赋值与对象的引用"></a>基本类型的赋值与对象的引用</h2><p>从一个变量向另一个变量赋值基本类型时，会在该变量上创建一个新值，然后再把该值复制到为新变量分配的位置上<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = <span class="number">10</span>;</div><div class="line"><span class="keyword">var</span> b = a;</div><div class="line"></div><div class="line">a ++ ;</div><div class="line"><span class="built_in">console</span>.log(a); <span class="comment">// 11</span></div><div class="line"><span class="built_in">console</span>.log(b); <span class="comment">// 10</span></div></pre></td></tr></table></figure></p>
+<p><img src="https://segmentfault.com/img/bVlSaN" alt=""><br>基本类型在赋值操作后，两个变量是相互不受影响的。</p>
+<p>当从一个变量向另一个变量赋值<code>引用类型</code>的值时，同样也会将存储在变量中的对象的值复制一份放到为新变量分配的空间中。前面讲<code>引用类型</code>的时候提到，保存在变量中的是对象在<code>堆内存</code>中的<code>地址</code>，所以，与简单赋值不同，这个值的副本实际上是一个<code>指针</code>，而这个指针指向存储在堆内存的一个对象。那么赋值操作后，两个变量都保存了同一个对象地址，则这两个变量指向了同一个对象。因此，改变其中任何一个变量，都会相互影响：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = &#123;&#125;; <span class="comment">// a保存了一个空对象的实例</span></div><div class="line"><span class="keyword">var</span> b = a;  <span class="comment">// a和b都指向了这个空对象</span></div><div class="line"></div><div class="line">a.name = <span class="string">'jozo'</span>;</div><div class="line"><span class="built_in">console</span>.log(a.name); <span class="comment">// 'jozo'</span></div><div class="line"><span class="built_in">console</span>.log(b.name); <span class="comment">// 'jozo'</span></div><div class="line"></div><div class="line">b.age = <span class="number">22</span>;</div><div class="line"><span class="built_in">console</span>.log(b.age);<span class="comment">// 22</span></div><div class="line"><span class="built_in">console</span>.log(a.age);<span class="comment">// 22</span></div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(a == b);<span class="comment">// true</span></div></pre></td></tr></table></figure>
+<p><img src="https://segmentfault.com/img/bVlSc9" alt=""><br>因此，引用类型的赋值其实是对象保存在栈区地址指针的赋值，因此两个变量指向同一个对象，任何的操作都会相互影响。</p>
+
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JS/" rel="tag">#JS</a>
+          
+            <a href="/tags/JavaScript/" rel="tag">#JavaScript</a>
+          
+            <a href="/tags/基础知识/" rel="tag">#基础知识</a>
+          
+            <a href="/tags/数据类型/" rel="tag">#数据类型</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/04/29/var/" rel="next" title="JavaScript复习(一)变量">
+                <i class="fa fa-chevron-left"></i> JavaScript复习(一)变量
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="Mars" />
+          <p class="site-author-name" itemprop="name">Mars</p>
+          <p class="site-description motion-element" itemprop="description">Coding.......</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/marsqinht" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.instagram.com/BearD01001" target="_blank" title="Instagram">
+                  
+                    <i class="fa fa-fw fa-instagram"></i>
+                  
+                  Instagram
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/1791620144/" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/qin-hai-tao/activities" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本类型"><span class="nav-number">1.</span> <span class="nav-text">基本类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#值不可变"><span class="nav-number">1.1.</span> <span class="nav-text">值不可变</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本类型的比较是值的比较："><span class="nav-number">1.2.</span> <span class="nav-text">基本类型的比较是值的比较：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本类型的变量是存放在栈区的（栈区指内存里的栈内存）"><span class="nav-number">1.3.</span> <span class="nav-text">基本类型的变量是存放在栈区的（栈区指内存里的栈内存）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引用类型"><span class="nav-number">2.</span> <span class="nav-text">引用类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#引用类型的值是可变的"><span class="nav-number">2.1.</span> <span class="nav-text">引用类型的值是可变的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#引用类型的值是同时保存在栈内存和堆内存中的对象"><span class="nav-number">2.2.</span> <span class="nav-text">引用类型的值是同时保存在栈内存和堆内存中的对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#引用类型的比较是引用的比较"><span class="nav-number">2.3.</span> <span class="nav-text">引用类型的比较是引用的比较</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本类型的赋值与对象的引用"><span class="nav-number">3.</span> <span class="nav-text">基本类型的赋值与对象的引用</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mars</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/HiDino9/hexo-theme-nextd">
+    NexTD
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid="></script>
+      <!-- UY END -->
+  
+
+
+
+  
+  
+
+  
+
+  
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+</body>
+</html>
