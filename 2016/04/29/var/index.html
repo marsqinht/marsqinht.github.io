@@ -1,0 +1,742 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="JS,JavaScript,变量,基础知识," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="写在前面进入工作，越发感觉原生JavaScript对于一名前端开发的重要性。各种前端框架、工具什么的，一天一个样，让人眼花缭乱。但是就算变化再多，底层依然是原生JS实现的。学好JS，上手这些新东西，就没有多高的难度了。深感自己JavaScript还有很多坑要填，这里再重新系统地学习一遍JavaScript，一周一篇，毕竟自己不是那么有恒心的人，希望自己能坚持下去！
+关于JavaScript什么是J">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript复习(一)变量">
+<meta property="og:url" content="https://marsqinht.github.io/2016/04/29/var/index.html">
+<meta property="og:site_name" content="Mars' Blog">
+<meta property="og:description" content="写在前面进入工作，越发感觉原生JavaScript对于一名前端开发的重要性。各种前端框架、工具什么的，一天一个样，让人眼花缭乱。但是就算变化再多，底层依然是原生JS实现的。学好JS，上手这些新东西，就没有多高的难度了。深感自己JavaScript还有很多坑要填，这里再重新系统地学习一遍JavaScript，一周一篇，毕竟自己不是那么有恒心的人，希望自己能坚持下去！
+关于JavaScript什么是J">
+<meta property="og:updated_time" content="2017-03-02T07:39:41.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript复习(一)变量">
+<meta name="twitter:description" content="写在前面进入工作，越发感觉原生JavaScript对于一名前端开发的重要性。各种前端框架、工具什么的，一天一个样，让人眼花缭乱。但是就算变化再多，底层依然是原生JS实现的。学好JS，上手这些新东西，就没有多高的难度了。深感自己JavaScript还有很多坑要填，这里再重新系统地学习一遍JavaScript，一周一篇，毕竟自己不是那么有恒心的人，希望自己能坚持下去！
+关于JavaScript什么是J">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 7566230,
+      author: 'Author'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://marsqinht.github.io/2016/04/29/var/"/>
+
+  <title> JavaScript复习(一)变量 | Mars' Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s6.cnzz.com/stat.php?id=1261020784&web_id=1261020784" type="text/javascript"></script>
+  </div>
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+    
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader" style="background-image: url('/images/bg3.jpg');">
+      <div class="header-inner"><a class="site-home" href="/">Mars' Blog</a>
+
+<div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <div href="/"  class="brand">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Mars' Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </div>
+  </div>
+  <p class="site-subtitle">做一个充满好奇心的Geek</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            博文归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签云
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+      <div class="header-post"> 
+  <div class="post-header">
+      <div class="tags">
+      
+        <a href="/tags/JS/" rel="tag" title="JS">JS</a>
+      
+        <a href="/tags/JavaScript/" rel="tag" title="JavaScript">JavaScript</a>
+      
+        <a href="/tags/变量/" rel="tag" title="变量">变量</a>
+      
+        <a href="/tags/基础知识/" rel="tag" title="基础知识">基础知识</a>
+      
+      </div>
+      <h1>JavaScript复习(一)变量</h1>
+      <h2 class="subtitle"></h2>
+      <div class="post-time">
+        <span class="post-meta-item-text">发表于 </span>
+        <time itemprop="dateCreated" datetime="2016-04-29T14:35:54+08:00" content="2016-04-29" title="2016-04-29 14:35:54">
+          2016-04-29
+        </time>
+      </div>
+  </div>
+ </div>
+    </header>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                JavaScript复习(一)变量
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-04-29T14:35:54+08:00" content="2016-04-29">
+              2016-04-29
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          <!-- 
+            
+           -->
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>进入工作，越发感觉原生<code>JavaScript</code>对于一名前端开发的重要性。各种<code>前端框架</code>、<code>工具</code>什么的，一天一个样，让人眼花缭乱。但是就算变化再多，底层依然是原生<code>JS</code>实现的。学好<code>JS</code>，上手这些新东西，就没有多高的难度了。深感自己<code>JavaScript</code>还有很多坑要填，这里再重新系统地学习一遍<code>JavaScript</code>，一周一篇，毕竟自己不是那么有恒心的人，希望自己能坚持下去！</p>
+<h2 id="关于JavaScript"><a href="#关于JavaScript" class="headerlink" title="关于JavaScript"></a>关于JavaScript</h2><h3 id="什么是JS"><a href="#什么是JS" class="headerlink" title="什么是JS?"></a>什么是JS?</h3><p>很多人天天用<code>JavaScript</code>，却对于什么是<code>JavaScript</code>都不太清楚，作为前端开发工作者就太不应该了~<br>简单地说<code>JavaScript</code>是一门轻量级的脚本语言，浏览器充当解释器。比如Chrome的<code>V8</code>引擎就是目前主流的<code>JS</code>解释器。<br><code>JS</code>执行时，在同一个作用域内是先解释再执行。解释的时候会编译<code>function</code>和<code>var</code>这两个关键词定义的变量，编译完成后从上往下执行并向变量赋值。</p>
+<blockquote>
+<p>关于<code>JavaScript</code>是如何诞生的，可以参考阮一峰的网络日志<a href="http://www.ruanyifeng.com/blog/2011/06/birth_of_javascript.html" target="_blank" rel="external">Javascript诞生记</a>。</p>
+</blockquote>
+<a id="more"></a>
+<h3 id="JavaScript与ECMAScript"><a href="#JavaScript与ECMAScript" class="headerlink" title="JavaScript与ECMAScript"></a>JavaScript与ECMAScript</h3><p><code>ECMAScript</code>其实是欧洲标准化组织<code>ECMA</code>为JavaScript提供的标准化方案，方便各个浏览器厂商，包括开发者按照一定规范开发。</p>
+<h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><h3 id="变量声明"><a href="#变量声明" class="headerlink" title="变量声明"></a>变量声明</h3><blockquote>
+<p>在JS中，第一次用都某个变量时，应该先进行变量声明。 </p>
+</blockquote>
+<p>使用<code>var</code>,进行变量声明,可以声明<code>全局</code>和<code>局部</code>变量。如果不赋值，则输出<code>undefined</code>。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = <span class="number">1</span>；</div><div class="line"><span class="built_in">console</span>.log(a)  <span class="comment">//1</span></div><div class="line"><span class="keyword">var</span> b;</div><div class="line"><span class="built_in">console</span>.log(b)  <span class="comment">//undefined</span></div></pre></td></tr></table></figure></p>
+<p>直接赋值，相当于声明一个<code>全局</code>变量，不建议使用。（并会导致JavaScript编译时产生一个严格警告。）<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">a = <span class="number">1</span>；</div><div class="line"><span class="built_in">console</span>.log(a)  <span class="comment">//1</span></div></pre></td></tr></table></figure></p>
+<p>声明多个变量，可以用<code>;</code>隔开。也可以<code>,</code>隔开，不用连续使用<code>var</code>。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</div><div class="line"><span class="keyword">var</span> b = <span class="number">2</span>;</div><div class="line"><span class="keyword">var</span> c = <span class="number">3</span>;</div><div class="line"><span class="built_in">console</span>.log(a,b,c) <span class="comment">//1,2,3</span></div><div class="line">   </div><div class="line"><span class="keyword">var</span> x = <span class="number">1</span>,</div><div class="line">    y = <span class="number">2</span>,</div><div class="line">    z = <span class="number">3</span>;</div><div class="line"><span class="built_in">console</span>.log(x,y,z) <span class="comment">//1,2,3</span></div></pre></td></tr></table></figure></p>
+<p>在<code>ES6</code>中新增了两种变量声明方式,分别是<code>let</code>和<code>const</code>。</p>
+<p><code>let</code>声明块范围局部变量。使用<code>let</code>只在所在的代码块中有效、如：在<code>for</code>循环以及<code>if</code>判断中。</p>
+<pre><code>&gt;可理解为大括号内{}的为代码块
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="keyword">var</span> a = <span class="number">1</span>;</div><div class="line">    <span class="keyword">let</span> b = <span class="number">2</span>;</div><div class="line">&#125;</div><div class="line"><span class="built_in">console</span>.log(a); <span class="comment">//1</span></div><div class="line"><span class="built_in">console</span>.log(b); <span class="comment">//ReferenceError: a is not defined.</span></div><div class="line">   </div><div class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)&#123;</div><div class="line">    <span class="keyword">var</span> a = <span class="number">1</span>;</div><div class="line">    <span class="keyword">let</span> b = <span class="number">2</span>;</div><div class="line">&#125;</div><div class="line"><span class="built_in">console</span>.log(a); <span class="comment">//1</span></div><div class="line"><span class="built_in">console</span>.log(b); <span class="comment">//ReferenceError: a is not defined</span></div></pre></td></tr></table></figure>
+</code></pre><p><code>const</code>即constants（常量）的缩写。字如其名，使用<code>const</code>定义的是只能读的常量不能改写。</p>
+<pre><code><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">   <span class="keyword">const</span> a = <span class="number">10</span>;</div><div class="line"><span class="built_in">console</span>.log(a); <span class="comment">//10</span></div><div class="line">a = <span class="number">5</span>;</div><div class="line"><span class="built_in">console</span>.log(a); <span class="comment">//10</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> b = <span class="number">10</span>;</div><div class="line"><span class="built_in">console</span>.log(b); <span class="comment">//10</span></div><div class="line">b = <span class="number">5</span>;</div><div class="line"><span class="built_in">console</span>.log(b); <span class="comment">//5</span></div></pre></td></tr></table></figure>
+</code></pre><h3 id="变量提升"><a href="#变量提升" class="headerlink" title="变量提升"></a>变量提升</h3><p>引用稍后声明的变量，不会引发异常。称为<code>变量声明提升(hoisting)</code>；而提升后的变量将返回<code>undefined</code> 值，所以即使在使用或引用某个变量之后存在声明和初始化操作，仍将得到 <code>undefined</code> 值。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"> 例子1</div><div class="line"> */</div><div class="line"><span class="built_in">console</span>.log(a === <span class="literal">undefined</span>); <span class="comment">//"true"</span></div><div class="line"><span class="keyword">var</span> a = <span class="number">3</span>;</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">/*</span></div><div class="line"> 例子 2</div><div class="line"> */</div><div class="line"><span class="keyword">var</span> luffy = <span class="string">"my love"</span>;</div><div class="line"></div><div class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(luffy); <span class="comment">// undefined</span></div><div class="line">  <span class="keyword">var</span> luffy = <span class="string">"one piece"</span>;</div><div class="line">&#125;)();</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>一个函数中所有的var语句应尽可能地放在接近函数顶部的地方,这样增加代码的清晰度</p>
+</blockquote>
+<ul>
+<li>函数表达式与函数声明</li>
+</ul>
+<p>JS在预解析的过程中，会将变量声明和函数表达式提升，现将所用变量拿到并不赋值相当于返回<code>undefined</code>。因此<code>函数表达式</code>和<code>函数声明</code>有所区别。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  fn1(); <span class="comment">//ReferenceError: f1 is not defined</span></div><div class="line">  fn2();</div><div class="line"> </div><div class="line">  <span class="keyword">var</span> fn1 = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;;</div><div class="line">  <span class="function"><span class="keyword">function</span> <span class="title">fn2</span>(<span class="params"></span>)</span>&#123;&#125;</div><div class="line">&#125;)();</div></pre></td></tr></table></figure></p>
+<h3 id="变量的作用域"><a href="#变量的作用域" class="headerlink" title="变量的作用域"></a>变量的作用域</h3><p><code>全局变量</code>和<code>局部变量</code>的区别，可以简单地理解为函数外的即<code>局部变量</code>，在函数内的为<code>局部变量</code>。</p>
+<blockquote>
+<p>全局变量除非被删除，会一直占用内存。<br>局部变量只在函数执行时存在，执行完毕后会被删除。尽量避免声明全局变量。</p>
+</blockquote>
+<p>读取变量的过程中，内部函数可以访问外部函数的局部变量。外部函数不能访问内部函数的局部变量。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line">内部函数可以访问外部的变量</div><div class="line">*/</div><div class="line"><span class="keyword">var</span> mars = <span class="string">'cool'</span>;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">scope</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(mars);  <span class="comment">//输出'cool' </span></div><div class="line">&#125;</div><div class="line">scope();</div><div class="line"><span class="comment">/*</span></div><div class="line">外部不能访问内部函数的变量</div><div class="line">*/</div><div class="line"><span class="built_in">console</span>.log(mars); <span class="comment">//输出' mars is not defined'</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">scope</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> mars = <span class="string">'so cool'</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>同时存在相同的全局和局部变量，采取就近原则<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> mars = <span class="string">'cool'</span>;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">scope</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> mars = <span class="string">'handsome'</span>;</div><div class="line">    <span class="built_in">console</span>.log(mars);  <span class="comment">//输出'handsome' </span></div><div class="line">&#125;</div><div class="line">scope();</div></pre></td></tr></table></figure></p>
+<p>需要注意的是在新的作用域内，会重新预解析，执行一遍，这就用到了之前<code>变量提升</code>的知识<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> mars = <span class="string">'cool'</span>;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">scope</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(mars);  <span class="comment">//输出'undefined' </span></div><div class="line">    <span class="keyword">var</span> mars = <span class="string">'handsome'</span>;</div><div class="line">&#125;</div><div class="line">scope();</div></pre></td></tr></table></figure></p>
+
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JS/" rel="tag">#JS</a>
+          
+            <a href="/tags/JavaScript/" rel="tag">#JavaScript</a>
+          
+            <a href="/tags/变量/" rel="tag">#变量</a>
+          
+            <a href="/tags/基础知识/" rel="tag">#基础知识</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/04/24/hello-world/" rel="next" title="Hello，World！">
+                <i class="fa fa-chevron-left"></i> Hello，World！
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="Mars" />
+          <p class="site-author-name" itemprop="name">Mars</p>
+          <p class="site-description motion-element" itemprop="description">Coding.......</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">2</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">标签云</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/marsqinht" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.instagram.com/BearD01001" target="_blank" title="Instagram">
+                  
+                    <i class="fa fa-fw fa-instagram"></i>
+                  
+                  Instagram
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/1791620144/" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/qin-hai-tao/activities" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#写在前面"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于JavaScript"><span class="nav-number">2.</span> <span class="nav-text">关于JavaScript</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是JS"><span class="nav-number">2.1.</span> <span class="nav-text">什么是JS?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JavaScript与ECMAScript"><span class="nav-number">2.2.</span> <span class="nav-text">JavaScript与ECMAScript</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#变量"><span class="nav-number">3.</span> <span class="nav-text">变量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#变量声明"><span class="nav-number">3.1.</span> <span class="nav-text">变量声明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#变量提升"><span class="nav-number">3.2.</span> <span class="nav-text">变量提升</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#变量的作用域"><span class="nav-number">3.3.</span> <span class="nav-text">变量的作用域</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mars</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/HiDino9/hexo-theme-nextd">
+    NexTD
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid="></script>
+      <!-- UY END -->
+  
+
+
+
+  
+  
+
+  
+
+  
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+</body>
+</html>
