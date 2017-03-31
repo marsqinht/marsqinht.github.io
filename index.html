@@ -134,7 +134,7 @@
       <span class="logo-line-after"><i></i></span>
     </div>
   </div>
-  <p class="site-subtitle">做一个充满好奇心的Geek</p>
+  <p class="site-subtitle">一个充满好奇心的程序员</p>
 </div>
 
 <div class="site-nav-toggle">
@@ -209,6 +209,99 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/02/11/jquery-ajax/" itemprop="url">
+                  简单的jquery式的ajax封装
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2017-02-11T20:07:29+08:00" content="2017-02-11">
+              2017-02-11
+            </time>
+          </span>
+
+          
+
+          <!-- 
+            
+           -->
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * AJAX函数封装</div><div class="line"> * @param &#123;string&#125; url     请求地址（必须）</div><div class="line"> * @param &#123;object&#125; options 发送请求的选项参数</div><div class="line"> *   @config &#123;string&#125; [options.type] 请求发送的类型。默认为GET。</div><div class="line"> *   @config &#123;Object&#125; [options.data] 需要发送的数据。</div><div class="line"> *   @config &#123;Function&#125; [options.onsuccess] 请求成功时触发，function(oAjax.responseText, oAjax)。（必须）</div><div class="line"> *   @config &#123;Function&#125; [options.onfail] 请求失败时触发，function(oAjax)。(oAJax为XMLHttpRequest对象)</div><div class="line"> *</div><div class="line"> *@returns &#123;XMLHttpRequest&#125; 发送请求的XMLHttpRequest对象</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">AJAX</span>(<span class="params">url, options</span>) </span>&#123;</div><div class="line">    <span class="comment">//1.创建ajax对象</span></div><div class="line">    <span class="keyword">var</span> oAjax = <span class="literal">null</span>;</div><div class="line">        <span class="comment">/**</span></div><div class="line">         * 此处必须需要使用window.的方式,表示为window对象的一个属性.不存在时值为undefined,进入else</div><div class="line">         * 若直接使用XMLHttpRequest,在不支持的情况下会报错</div><div class="line">         **/</div><div class="line">    <span class="keyword">if</span> (<span class="built_in">window</span>.XMLHttpRequest) &#123;</div><div class="line">        <span class="comment">//IE6以上</span></div><div class="line">        oAjax = <span class="keyword">new</span> XMLHttpRequest();</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        oAjax = <span class="keyword">new</span> ActiveXObject(<span class="string">"Microsoft.XMLHTTP"</span>);</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="comment">//2.连接服务器</span></div><div class="line">    <span class="comment">//open(方法,url,是否异步)</span></div><div class="line">    <span class="keyword">var</span> param = <span class="string">""</span>; <span class="comment">//请求参数。</span></div><div class="line">    <span class="comment">//只有data存在，且为对象使才执行</span></div><div class="line">    <span class="keyword">var</span> data = options.data ? options.data : <span class="number">-1</span>; <span class="comment">//缓存data</span></div><div class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> (data) === <span class="string">"object"</span>) &#123;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> key <span class="keyword">in</span> data) &#123; <span class="comment">//请求参数拼接</span></div><div class="line">            <span class="keyword">if</span> (data.hasOwnProperty(key)) &#123;</div><div class="line">                param += key + <span class="string">"="</span> + data[key] + <span class="string">"&amp;"</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        param.replace(<span class="regexp">/&amp;$/</span>, <span class="string">""</span>);</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        param = <span class="string">"timestamp="</span> + <span class="keyword">new</span> <span class="built_in">Date</span>().getTime();</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//3.发送请求</span></div><div class="line">    <span class="keyword">var</span> type = options.type ? options.type.toUpperCase() : <span class="string">"GET"</span>;</div><div class="line">    <span class="keyword">if</span> (type === <span class="string">"GET"</span>) &#123;</div><div class="line">        oAjax.open(<span class="string">"GET"</span>, url + <span class="string">"?"</span> + param, <span class="literal">true</span>);</div><div class="line">        oAjax.send();</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        oAjax.open(<span class="string">"POST"</span>, url, <span class="literal">true</span>);</div><div class="line">        oAjax.setRequestHeader(<span class="string">"Content-type"</span>, <span class="string">"application/x-www-form-urlencoded"</span>);</div><div class="line">        oAjax.send(param);</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//4.接收返回</span></div><div class="line">    <span class="comment">//OnRedayStateChange事件</span></div><div class="line">    oAjax.onreadystatechange = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">if</span> (oAjax.readyState === <span class="number">4</span>) &#123;</div><div class="line">            <span class="keyword">if</span> (oAjax.status === <span class="number">200</span>) &#123;</div><div class="line">                <span class="comment">//请求成功。形参为获取到的字符串形式的响应数据</span></div><div class="line">                options.onsuccess(oAjax.responseText, oAjax);</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                <span class="comment">//先判断是否存在请求失败函数</span></div><div class="line">                <span class="comment">//存在时，形参为XMLHttpRequest对象，便于进行错误进行处理</span></div><div class="line">                <span class="keyword">if</span> (options.onfail) &#123;</div><div class="line">                    options.onfail(oAjax);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line">    <span class="keyword">return</span> oAjax;<span class="comment">//发送请求的XMLHttpRequest对象</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
     
       
 
@@ -1134,106 +1227,6 @@ $ cnpm install webpack --save-dev
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/05/07/datatype/" itemprop="url">
-                  JavaScript复习(二)数据类型
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-05-07T17:46:06+08:00" content="2016-05-07">
-              2016-05-07
-            </time>
-          </span>
-
-          
-
-          <!-- 
-            
-           -->
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>ECMAScirpt 变量有两种不同的数据类型：<code>基本类型</code>，<code>引用类型</code>。也有其他的叫法，比如<code>原始类型</code>和<code>对象类型</code>。这些叫法都是依据这两种的类型特点来命名的。</p>
-<h2 id="基本类型"><a href="#基本类型" class="headerlink" title="基本类型"></a>基本类型</h2><hr>
-<p>基本的数据类型有：<code>undefined</code>，<code>boolean</code>，<code>number</code>，<code>string</code>，<code>null</code>.基本类型的访问是<code>按值</code>访问的，就是说你可以操作保存在变量中的实际的值。基本类型有以下几个特点：<br>(<code>typeof null</code> 输出<code>object</code>  因为null本质上是也是<code>对象</code>只是指向了<code>空指针</code>)</p>
-<h3 id="值不可变"><a href="#值不可变" class="headerlink" title="值不可变"></a>值不可变</h3><p>任何方法都无法改变一个基本类型的值，比如一个字符串:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> name = <span class="string">'jay'</span>;</div><div class="line"><span class="built_in">console</span>.log(name.toUpperCase()); <span class="comment">// 输出 'JAY'</span></div><div class="line"><span class="built_in">console</span>.log(name); <span class="comment">// 输出  'jay'</span></div></pre></td></tr></table></figure>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/05/07/datatype/" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1279,7 +1272,7 @@ $ cnpm install webpack --save-dev
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-count">13</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -1296,7 +1289,7 @@ $ cnpm install webpack --save-dev
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">26</span>
+                <span class="site-state-item-count">28</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

@@ -42,7 +42,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="基础知识,JavaScript,bind," />
+  <meta name="keywords" content="ajax,javascript," />
 
 
 
@@ -58,16 +58,16 @@
 
 
 
-<meta name="description" content="1234567891011121314151617181920212223if (!Function.prototype.bind) &amp;#123;  Function.prototype.bind = function (oThis) &amp;#123;    if (typeof this !== &quot;function&quot;) &amp;#123;        throw new TypeError(&quot;bind只">
+<meta name="description" content="1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768/** * AJAX函数封装 * @param &amp;#123;string&amp;#125; url     请求地址（必须） * @param &amp;#12">
 <meta property="og:type" content="article">
-<meta property="og:title" content="手写一个bind函数">
-<meta property="og:url" content="https://marsqinht.github.io/2016/11/12/self-bind/index.html">
+<meta property="og:title" content="简单的jquery式的ajax封装">
+<meta property="og:url" content="https://marsqinht.github.io/2017/02/11/jquery-ajax/index.html">
 <meta property="og:site_name" content="Mars' Blog">
-<meta property="og:description" content="1234567891011121314151617181920212223if (!Function.prototype.bind) &amp;#123;  Function.prototype.bind = function (oThis) &amp;#123;    if (typeof this !== &quot;function&quot;) &amp;#123;        throw new TypeError(&quot;bind只">
-<meta property="og:updated_time" content="2017-03-31T10:13:37.000Z">
+<meta property="og:description" content="1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768/** * AJAX函数封装 * @param &amp;#123;string&amp;#125; url     请求地址（必须） * @param &amp;#12">
+<meta property="og:updated_time" content="2017-03-31T12:11:34.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="手写一个bind函数">
-<meta name="twitter:description" content="1234567891011121314151617181920212223if (!Function.prototype.bind) &amp;#123;  Function.prototype.bind = function (oThis) &amp;#123;    if (typeof this !== &quot;function&quot;) &amp;#123;        throw new TypeError(&quot;bind只">
+<meta name="twitter:title" content="简单的jquery式的ajax封装">
+<meta name="twitter:description" content="1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768/** * AJAX函数封装 * @param &amp;#123;string&amp;#125; url     请求地址（必须） * @param &amp;#12">
 
 
 
@@ -88,9 +88,9 @@
 
 
 
-  <link rel="canonical" href="https://marsqinht.github.io/2016/11/12/self-bind/"/>
+  <link rel="canonical" href="https://marsqinht.github.io/2017/02/11/jquery-ajax/"/>
 
-  <title> 手写一个bind函数 | Mars' Blog </title>
+  <title> 简单的jquery式的ajax封装 | Mars' Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -203,19 +203,17 @@
   <div class="post-header">
       <div class="tags">
       
-        <a href="/tags/基础知识/" rel="tag" title="基础知识">基础知识</a>
+        <a href="/tags/ajax/" rel="tag" title="ajax">ajax</a>
       
-        <a href="/tags/JavaScript/" rel="tag" title="JavaScript">JavaScript</a>
-      
-        <a href="/tags/bind/" rel="tag" title="bind">bind</a>
+        <a href="/tags/javascript/" rel="tag" title="javascript">javascript</a>
       
       </div>
-      <h1>手写一个bind函数</h1>
+      <h1>简单的jquery式的ajax封装</h1>
       <h2 class="subtitle"></h2>
       <div class="post-time">
         <span class="post-meta-item-text">Posted on </span>
-        <time itemprop="dateCreated" datetime="2016-11-12T18:11:11+08:00" content="2016-11-12" title="2016-11-12 18:11:11">
-          2016-11-12
+        <time itemprop="dateCreated" datetime="2017-02-11T20:07:29+08:00" content="2017-02-11" title="2017-02-11 20:07:29">
+          2017-02-11
         </time>
       </div>
   </div>
@@ -250,7 +248,7 @@
             
             
               
-                手写一个bind函数
+                简单的jquery式的ajax封装
               
             
           </h1>
@@ -262,8 +260,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-11-12T18:11:11+08:00" content="2016-11-12">
-              2016-11-12
+            <time itemprop="dateCreated" datetime="2017-02-11T20:07:29+08:00" content="2017-02-11">
+              2017-02-11
             </time>
           </span>
 
@@ -290,7 +288,7 @@
       
 
       
-        <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (!<span class="built_in">Function</span>.prototype.bind) &#123;</div><div class="line">  <span class="built_in">Function</span>.prototype.bind = <span class="function"><span class="keyword">function</span> (<span class="params">oThis</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="keyword">this</span> !== <span class="string">"function"</span>) &#123;</div><div class="line">  </div><div class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">TypeError</span>(<span class="string">"bind只支持函数调用！"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">var</span> aArgs = <span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>, <span class="number">1</span>), </div><div class="line">        fToBind = <span class="keyword">this</span>, </div><div class="line">        fNOP = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;,</div><div class="line">        fBound = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">          <span class="keyword">return</span> fToBind.apply(<span class="keyword">this</span> <span class="keyword">instanceof</span> fNOP</div><div class="line">                                 ? <span class="keyword">this</span></div><div class="line">                                 : oThis || <span class="keyword">this</span>,</div><div class="line">                               aArgs.concat(<span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>)));</div><div class="line">        &#125;;</div><div class="line"></div><div class="line">    fNOP.prototype = <span class="keyword">this</span>.prototype;</div><div class="line">    fBound.prototype = <span class="keyword">new</span> fNOP();</div><div class="line"></div><div class="line">    <span class="keyword">return</span> fBound;</div><div class="line">  &#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+        <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * AJAX函数封装</div><div class="line"> * @param &#123;string&#125; url     请求地址（必须）</div><div class="line"> * @param &#123;object&#125; options 发送请求的选项参数</div><div class="line"> *   @config &#123;string&#125; [options.type] 请求发送的类型。默认为GET。</div><div class="line"> *   @config &#123;Object&#125; [options.data] 需要发送的数据。</div><div class="line"> *   @config &#123;Function&#125; [options.onsuccess] 请求成功时触发，function(oAjax.responseText, oAjax)。（必须）</div><div class="line"> *   @config &#123;Function&#125; [options.onfail] 请求失败时触发，function(oAjax)。(oAJax为XMLHttpRequest对象)</div><div class="line"> *</div><div class="line"> *@returns &#123;XMLHttpRequest&#125; 发送请求的XMLHttpRequest对象</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">AJAX</span>(<span class="params">url, options</span>) </span>&#123;</div><div class="line">    <span class="comment">//1.创建ajax对象</span></div><div class="line">    <span class="keyword">var</span> oAjax = <span class="literal">null</span>;</div><div class="line">        <span class="comment">/**</span></div><div class="line">         * 此处必须需要使用window.的方式,表示为window对象的一个属性.不存在时值为undefined,进入else</div><div class="line">         * 若直接使用XMLHttpRequest,在不支持的情况下会报错</div><div class="line">         **/</div><div class="line">    <span class="keyword">if</span> (<span class="built_in">window</span>.XMLHttpRequest) &#123;</div><div class="line">        <span class="comment">//IE6以上</span></div><div class="line">        oAjax = <span class="keyword">new</span> XMLHttpRequest();</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        oAjax = <span class="keyword">new</span> ActiveXObject(<span class="string">"Microsoft.XMLHTTP"</span>);</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="comment">//2.连接服务器</span></div><div class="line">    <span class="comment">//open(方法,url,是否异步)</span></div><div class="line">    <span class="keyword">var</span> param = <span class="string">""</span>; <span class="comment">//请求参数。</span></div><div class="line">    <span class="comment">//只有data存在，且为对象使才执行</span></div><div class="line">    <span class="keyword">var</span> data = options.data ? options.data : <span class="number">-1</span>; <span class="comment">//缓存data</span></div><div class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> (data) === <span class="string">"object"</span>) &#123;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> key <span class="keyword">in</span> data) &#123; <span class="comment">//请求参数拼接</span></div><div class="line">            <span class="keyword">if</span> (data.hasOwnProperty(key)) &#123;</div><div class="line">                param += key + <span class="string">"="</span> + data[key] + <span class="string">"&amp;"</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        param.replace(<span class="regexp">/&amp;$/</span>, <span class="string">""</span>);</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        param = <span class="string">"timestamp="</span> + <span class="keyword">new</span> <span class="built_in">Date</span>().getTime();</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//3.发送请求</span></div><div class="line">    <span class="keyword">var</span> type = options.type ? options.type.toUpperCase() : <span class="string">"GET"</span>;</div><div class="line">    <span class="keyword">if</span> (type === <span class="string">"GET"</span>) &#123;</div><div class="line">        oAjax.open(<span class="string">"GET"</span>, url + <span class="string">"?"</span> + param, <span class="literal">true</span>);</div><div class="line">        oAjax.send();</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        oAjax.open(<span class="string">"POST"</span>, url, <span class="literal">true</span>);</div><div class="line">        oAjax.setRequestHeader(<span class="string">"Content-type"</span>, <span class="string">"application/x-www-form-urlencoded"</span>);</div><div class="line">        oAjax.send(param);</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//4.接收返回</span></div><div class="line">    <span class="comment">//OnRedayStateChange事件</span></div><div class="line">    oAjax.onreadystatechange = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">if</span> (oAjax.readyState === <span class="number">4</span>) &#123;</div><div class="line">            <span class="keyword">if</span> (oAjax.status === <span class="number">200</span>) &#123;</div><div class="line">                <span class="comment">//请求成功。形参为获取到的字符串形式的响应数据</span></div><div class="line">                options.onsuccess(oAjax.responseText, oAjax);</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                <span class="comment">//先判断是否存在请求失败函数</span></div><div class="line">                <span class="comment">//存在时，形参为XMLHttpRequest对象，便于进行错误进行处理</span></div><div class="line">                <span class="keyword">if</span> (options.onfail) &#123;</div><div class="line">                    options.onfail(oAjax);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line">    <span class="keyword">return</span> oAjax;<span class="comment">//发送请求的XMLHttpRequest对象</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
         
       
     </div>
@@ -313,11 +311,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/基础知识/" rel="tag">#基础知识</a>
+            <a href="/tags/ajax/" rel="tag">#ajax</a>
           
-            <a href="/tags/JavaScript/" rel="tag">#JavaScript</a>
-          
-            <a href="/tags/bind/" rel="tag">#bind</a>
+            <a href="/tags/javascript/" rel="tag">#javascript</a>
           
         </div>
       
@@ -326,17 +322,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/11/06/closure/" rel="next" title="简单讲下什么是闭包">
-                <i class="fa fa-chevron-left"></i> 简单讲下什么是闭包
+              <a href="/2017/01/03/vue-data-observe/" rel="next" title="Vue数据绑定和响应式原理">
+                <i class="fa fa-chevron-left"></i> Vue数据绑定和响应式原理
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/01/03/vue-data-observe/" rel="prev" title="Vue数据绑定和响应式原理">
-                Vue数据绑定和响应式原理 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
