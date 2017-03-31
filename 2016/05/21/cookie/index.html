@@ -1,0 +1,764 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="JS,基础知识,JavaScript,Cookie,本地存储," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="前几天公司业务中频频遇到cookie的问题，比如跨域。细细一查才发现自己对cookie真的只是一知半解，这里对之前几天对cookie的学习做一个总结，旨在给自己加深一下印象。
+
+什么是cookie？
+由于HTTP是一种无状态的协议，服务器单从网络连接上无从知道客户身份。怎么办呢？就给客户端们颁发一个通行证，每人一个，无论谁访问都必须携带自己通行证。这样服务器就能从通行证上确认客户身份了。这时候c">
+<meta property="og:type" content="article">
+<meta property="og:title" content="这几天研究Cookie的小结">
+<meta property="og:url" content="https://marsqinht.github.io/2016/05/21/cookie/index.html">
+<meta property="og:site_name" content="Mars' Blog">
+<meta property="og:description" content="前几天公司业务中频频遇到cookie的问题，比如跨域。细细一查才发现自己对cookie真的只是一知半解，这里对之前几天对cookie的学习做一个总结，旨在给自己加深一下印象。
+
+什么是cookie？
+由于HTTP是一种无状态的协议，服务器单从网络连接上无从知道客户身份。怎么办呢？就给客户端们颁发一个通行证，每人一个，无论谁访问都必须携带自己通行证。这样服务器就能从通行证上确认客户身份了。这时候c">
+<meta property="og:image" content="https://marsqinht.github.io/images/chrome_cookie.jpg">
+<meta property="og:updated_time" content="2017-03-15T09:19:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="这几天研究Cookie的小结">
+<meta name="twitter:description" content="前几天公司业务中频频遇到cookie的问题，比如跨域。细细一查才发现自己对cookie真的只是一知半解，这里对之前几天对cookie的学习做一个总结，旨在给自己加深一下印象。
+
+什么是cookie？
+由于HTTP是一种无状态的协议，服务器单从网络连接上无从知道客户身份。怎么办呢？就给客户端们颁发一个通行证，每人一个，无论谁访问都必须携带自己通行证。这样服务器就能从通行证上确认客户身份了。这时候c">
+<meta name="twitter:image" content="https://marsqinht.github.io/images/chrome_cookie.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 7566230,
+      author: 'Author'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://marsqinht.github.io/2016/05/21/cookie/"/>
+
+  <title> 这几天研究Cookie的小结 | Mars' Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s6.cnzz.com/stat.php?id=1261020784&web_id=1261020784" type="text/javascript"></script>
+  </div>
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+    
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader" style="background-image: url('/images/code1.jpg');">
+      <div class="header-inner"><a class="site-home" href="/">Mars' Blog</a>
+
+<div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <div href="/"  class="brand">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Mars' Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </div>
+  </div>
+  <p class="site-subtitle">做一个充满好奇心的Geek</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+      <div class="header-post"> 
+  <div class="post-header">
+      <div class="tags">
+      
+        <a href="/tags/JS/" rel="tag" title="JS">JS</a>
+      
+        <a href="/tags/基础知识/" rel="tag" title="基础知识">基础知识</a>
+      
+        <a href="/tags/JavaScript/" rel="tag" title="JavaScript">JavaScript</a>
+      
+        <a href="/tags/Cookie/" rel="tag" title="Cookie">Cookie</a>
+      
+        <a href="/tags/本地存储/" rel="tag" title="本地存储">本地存储</a>
+      
+      </div>
+      <h1>这几天研究Cookie的小结</h1>
+      <h2 class="subtitle"></h2>
+      <div class="post-time">
+        <span class="post-meta-item-text">Posted on </span>
+        <time itemprop="dateCreated" datetime="2016-05-21T17:10:20+08:00" content="2016-05-21" title="2016-05-21 17:10:20">
+          2016-05-21
+        </time>
+      </div>
+  </div>
+ </div>
+    </header>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                这几天研究Cookie的小结
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-05-21T17:10:20+08:00" content="2016-05-21">
+              2016-05-21
+            </time>
+          </span>
+
+          
+
+          <!-- 
+            
+           -->
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>前几天公司业务中频频遇到cookie的问题，比如跨域。细细一查才发现自己对cookie真的只是一知半解，这里对之前几天对cookie的学习做一个总结，旨在给自己加深一下印象。</p>
+</blockquote>
+<h1 id="什么是cookie？"><a href="#什么是cookie？" class="headerlink" title="什么是cookie？"></a>什么是cookie？</h1><hr>
+<p>由于<code>HTTP</code>是一种<code>无状态</code>的协议，服务器单从网络连接上无从知道客户身份。怎么办呢？就给客户端们颁发一个通行证，每人一个，无论谁访问都必须携带自己通行证。这样服务器就能从通行证上确认客户身份了。这时候<code>cookie</code>就诞生了，简单来说，<code>cookie</code>其实就是服务器保存在浏览器的一小段文本信息。</p>
+<h1 id="cookie的特性"><a href="#cookie的特性" class="headerlink" title="cookie的特性"></a>cookie的特性</h1><h2 id="cookie有哪些属性？"><a href="#cookie有哪些属性？" class="headerlink" title="cookie有哪些属性？"></a>cookie有哪些属性？</h2><p>下面是我们在chrome开发者工具查看cookie的方式，标红处是他所具有的属性。</p>
+<p><img src="/images/chrome_cookie.jpg" alt=""></p>
+<ul>
+<li>name<br>该Cookie的名称，一旦创建，名称便不可更改</li>
+<li>value<br>该Cookie的值，如果值为Unicode字符，需要为字符编码,如果值为二进制数据，则需要使用BASE64编码</li>
+</ul>
+<a id="more"></a>
+<ul>
+<li><p>domain<br>可以访问该Cookie的域名。如果设置为”.google.com”,则所有以”google.com”结尾的域名都可以访问该Cookie。注意第一个字符必须为“.”</p>
+<p>这个domain稍作解释：</p>
+<blockquote>
+<p>非顶级域名，如二级域名或者三级域名，设置的cookie的domain只能为顶级域名或者二级域名或者三级域名本身，不能设置其他二级域名的cookie，否则cookie无法生成。</p>
+<p>顶级域名只能设置domain为顶级域名，不能设置为二级域名或者三级域名，否则cookie无法生成。</p>
+<p>二级域名能读取设置了domain为顶级域名或者自身的cookie，不能读取其他二级域名domain的cookie。所以要想cookie在多个二级域名中共享，需要设置domain为顶级域名，这样就可以在所有二级域名里面或者到这个cookie的值了。<br>顶级域名只能获取到domain设置为顶级域名的cookie，其他domain设置为二级域名的无法获取。</p>
+</blockquote>
+</li>
+<li><p>Path<br>path字段为可以访问此cookie的页面路径。 比如domain是abc.com,  path是/detail，那么只有/detail 路径下的页面可以读取此cookie。 </p>
+</li>
+</ul>
+<ul>
+<li><p>Expires/Max-Age<br>  该Cookie失效时间，单位秒。如果为正数，则Cookie在maxAge秒之后失效。<br>  如果为负数，该Cookie为临时Cookie，关闭浏览器即失效，浏览器也不会以任何形式保存Cookie.<br>  如果为0，表示删除Cookie。默认是-1</p>
+</li>
+<li><p>Size<br>cookie的大小</p>
+</li>
+<li><p>http<br> <code>cookie</code>的<code>httponly</code>属性。若此属性为<code>true</code>，则只有在http请求头中会带有此cookie的信息，而不能通过<code>document.cookie</code>来访问此cookie。</p>
+</li>
+<li><p>secure</p>
+<p>设置是否只能通过https来传递此条cookie</p>
+</li>
+</ul>
+<h3 id="Cookie的特性"><a href="#Cookie的特性" class="headerlink" title="Cookie的特性"></a>Cookie的特性</h3><p>  1、一个浏览器针对一个网站最多存20个Cookie，浏览器一般只允许存放300个Cookie；<br>  2、每个Cookie的长度不能超过4KB（稀缺）。但不同的浏览器实现的不同；<br>  3、Cookie的不可跨域名性。</p>
+<pre><code>例如：Cookie在客户端是由浏览器来管理的，浏览器能够保证Google只会操作Google的Cookie而不会操作Baidu的Cookie，从而保证用户的隐私安全。
+</code></pre><h3 id="Cookie的分类"><a href="#Cookie的分类" class="headerlink" title="Cookie的分类"></a>Cookie的分类</h3><p>cookie有两种类型：</p>
+<ul>
+<li>临时Cookie（会话Cookie）</li>
+<li><p>永久Cookie</p>
+<p>  不设置过期时间，则表示这个cookie生命周期为浏览器会话期间，只要关闭浏览器窗口，cookie就消失了。这种生命期为浏览会话期的cookie被称为会话cookie。会话cookie一般不保存在硬盘上而是保存在内存里。可以类比于本地存储的sessionstore</p>
+<p> 设置了过期时间，浏览器就会把cookie保存到硬盘上，关闭后再次打开浏览器，这些cookie依然有效直到超过设定的过期时间。</p>
+<p> 存储在硬盘上的cookie可以在不同的浏览器进程间共享，比如两个IE窗口。而对于保存在内存的cookie，不同的浏览器有不同的处理方式。可以类比于本地存储的localstorage。</p>
+</li>
+</ul>
+<p>cookie的发送：</p>
+<pre><code>服务器端像客户端发送Cookie是通过HTTP响应报文实现的，在Set-Cookie中设置需要像客户端发送的cookie，cookie格式如下：
+</code></pre><h3 id="操作Cookie"><a href="#操作Cookie" class="headerlink" title="操作Cookie"></a>操作Cookie</h3><p>Set-Cookie: “name=value;domain=.domain.com;path=/;expires=Sat, 11 Jun 2016 11:29:42 GMT;HttpOnly;secure”<br>其中name=value是必选项，其它都是可选项。</p>
+<h3 id="Cookie的增删改查"><a href="#Cookie的增删改查" class="headerlink" title="Cookie的增删改查"></a>Cookie的增删改查</h3><h4 id="读取cookie"><a href="#读取cookie" class="headerlink" title="读取cookie"></a>读取cookie</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getCookie</span>(<span class="params">name</span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> cookieName=<span class="built_in">encodeURIComponent</span>(name)+<span class="string">"="</span>,</div><div class="line">    cookieStart=<span class="built_in">document</span>.cookie.indexOf(cookieName),</div><div class="line">    cookieValue=<span class="literal">null</span>;</div><div class="line">    <span class="keyword">if</span>(cookieStart&gt;<span class="number">-1</span>)&#123;</div><div class="line">        <span class="keyword">var</span> cookieEnd=<span class="built_in">document</span>.cookie.indexOf(<span class="string">";"</span>,cookieStart);</div><div class="line">        <span class="keyword">if</span>(cookieEnd==<span class="number">-1</span>)&#123;</div><div class="line">            cookieEnd=<span class="built_in">document</span>.cookie.Length;</div><div class="line">        &#125;</div><div class="line">        cookieValue=<span class="built_in">decodeURIComponent</span>(<span class="built_in">document</span>.cookie.substring(cookieStart+<span class="built_in">document</span>.cookie.length,cookieEnd));</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> cookieValue;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="cookie的修改与删除"><a href="#cookie的修改与删除" class="headerlink" title="cookie的修改与删除"></a>cookie的修改与删除</h4><p>Cookie并不提供修改、删除操作。如果要修改某个Cookie，只需要新建一个同名的Cookie，添加到response中覆盖原来的Cookie。<br>如果要删除某个Cookie，只需要新建一个同名的Cookie，并将maxAge设置为0，并添加到response中覆盖原来的Cookie。注意是0而不是负数。</p>
+<h2 id="Cookie的安全问题"><a href="#Cookie的安全问题" class="headerlink" title="Cookie的安全问题"></a>Cookie的安全问题</h2><blockquote>
+<p>通常cookie信息都是使用http连接传递数据，这种传递方式很容易被查看，而且js里面直接有一个document.cookie方法，可以直接获取到用户的cooie,所以cookie存储的信息容易被窃取。假如cookie中所传递的内容比较重要，那么就要求使用加密的数据传输。</p>
+</blockquote>
+<p><strong>如何来防范cookie的安全呢？有以下几种方法：</strong><br>1.HttpOnly属性   如果在Cookie中设置了”HttpOnly”属性，那么通过程序(JS脚本、Applet等)将无法读取到Cookie信息，这样能有效的防止XSS攻击。<br>2.secure属性    当设置为true时，表示创建的 Cookie 会被以安全的形式向服务器传输，也就是只能在 HTTPS 连接中被浏览器传递到服务器端进行会话验证，如果是 HTTP 连接则不会传递该信息，所以不会被盗取到Cookie 的具体内容。</p>
+<p>我们再来看看一道经典的面试题：<br><strong>登录时候用cookie的话，安全性问题怎么解决？</strong><br>这个问题，网上找了比较久的答案，比较满意的有两种答案（答案是网上找的）<br><strong>第一种是：</strong><br>    把用户对象（包含了用户ID、用户名、是否登录..）序列化成字符串再加密存入Cookie。<br>    密钥是：客户端IP+浏览器Agent+用户标识+固定的私有密钥<br>    当cookie被窃取后，只要任一信息不匹配，就无法解密cookie，进而也就不能登录了。<br>    这样做的缺点是IP不能变动、频繁加密解密会加重CPU负担</p>
+<p> <strong>第二种是：</strong><br>将用户的认证信息保存在一个cookie中，具体如下： 1.cookie名：uid。推荐进行加密，比如MD5(‘站点名称’)等。 2.cookie值：登录名|有效时间Expires|hash值。hash值可以由”登录名+有效时间Expires+用户密码（加密后的）的前几位 +salt” (<strong>salt是保证在服务器端站点配置文件中的随机数)</strong><br>这样子设计有以下几个优点： 1.即使<a href="http://lib.csdn.net/base/14" target="_blank" rel="external">数据库</a>被盗了，盗用者还是无法登录到系统，因为组成cookie值的salt是保证在服务器站点配置文件中而非数据 库。 2.如果账户被盗了，用户修改密码，可以使盗用者的cookie值无效。 3.如果服务器端的数据库被盗了，通过修改salt值可以使所有用户的cookie值无效，迫使用户重新登录系统。 4.有效时间Expires可以设置为当前时间+过去时间（比如2天），这样可以保证每次登录的cookie值都不一样，防止盗用者 窥探到自己的cookie值后作为后门，长期登录。</p>
+<h2 id="cookie跨域问题以及解决方案"><a href="#cookie跨域问题以及解决方案" class="headerlink" title="cookie跨域问题以及解决方案"></a>cookie跨域问题以及解决方案</h2><p>   cookie是不能跨域访问的，那么，假如需要跨域来进行cookie的访问和传递，该怎么办呢？查找了比较多的资料，比较少这方面的资料，在cookie跨域这个问题上，前端能做的不多，很多都是需要和后端一起配合来完成。<br>总结了下面的几种方法，具体的实现过程这里没有写，可以点击我提供的链接自己看看。<br>      前2种具体的实现方法可以点击看这里:<a href="http://www.cnblogs.com/hujunzheng/p/5744755.html" target="_blank" rel="external">点我</a></p>
+<p><strong>1、nginx方向代理：</strong><br>　　反向代理（Reverse Proxy）方式是指以代理服务器来接受Internet上的连接请求，然后将请求转发给内部网络上的服务器；并将从服务器上得到的结果返回给Internet上请求连接的客户端，此时代理服务器对外就表现为一个服务器。<br>　　反向代理服务器对于客户端而言它就像是原始服务器，并且客户端不需要进行任何特别的设置。客户端向反向代理 的命名空间(name-space)中的内容发送普通请求，接着反向代理将判断向何处(原始服务器)转交请求，并将获得的内容返回给客户端，就像这些内容 原本就是它自己的一样。<br><strong>2、jsonp方法：</strong><br><strong>　　</strong>这个方法和我们平时处理js跨域的jsonp方法一样。具体实现方法可以看看淘宝的解决方法，<a href="http://developer.51cto.com/art/201104/255729.htm" target="_blank" rel="external">点我</a><br><strong>3、nodejs的superagent</strong><br><strong>4、iframe方法：</strong><br>比如有个www.a.com/index.html的页面，往www.b.com/index.html的页面传递cookie</p>
+<p>OK，本文结束。</p>
+
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JS/" rel="tag">#JS</a>
+          
+            <a href="/tags/基础知识/" rel="tag">#基础知识</a>
+          
+            <a href="/tags/JavaScript/" rel="tag">#JavaScript</a>
+          
+            <a href="/tags/Cookie/" rel="tag">#Cookie</a>
+          
+            <a href="/tags/本地存储/" rel="tag">#本地存储</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/07/datatype/" rel="next" title="JavaScript复习(二)数据类型">
+                <i class="fa fa-chevron-left"></i> JavaScript复习(二)数据类型
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/06/28/git-guide/" rel="prev" title="Git指南">
+                Git指南 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="Mars" />
+          <p class="site-author-name" itemprop="name">Mars</p>
+          <p class="site-description motion-element" itemprop="description">Coding.......</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">26</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/marsqinht" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.instagram.com/BearD01001" target="_blank" title="Instagram">
+                  
+                    <i class="fa fa-fw fa-instagram"></i>
+                  
+                  Instagram
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/1791620144/" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/qin-hai-tao/activities" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是cookie？"><span class="nav-number">1.</span> <span class="nav-text">什么是cookie？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#cookie的特性"><span class="nav-number">2.</span> <span class="nav-text">cookie的特性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#cookie有哪些属性？"><span class="nav-number">2.1.</span> <span class="nav-text">cookie有哪些属性？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Cookie的特性"><span class="nav-number">2.1.1.</span> <span class="nav-text">Cookie的特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cookie的分类"><span class="nav-number">2.1.2.</span> <span class="nav-text">Cookie的分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#操作Cookie"><span class="nav-number">2.1.3.</span> <span class="nav-text">操作Cookie</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cookie的增删改查"><span class="nav-number">2.1.4.</span> <span class="nav-text">Cookie的增删改查</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#读取cookie"><span class="nav-number">2.1.4.1.</span> <span class="nav-text">读取cookie</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#cookie的修改与删除"><span class="nav-number">2.1.4.2.</span> <span class="nav-text">cookie的修改与删除</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cookie的安全问题"><span class="nav-number">2.2.</span> <span class="nav-text">Cookie的安全问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cookie跨域问题以及解决方案"><span class="nav-number">2.3.</span> <span class="nav-text">cookie跨域问题以及解决方案</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mars</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/HiDino9/hexo-theme-nextd">
+    NexTD
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid="></script>
+      <!-- UY END -->
+  
+
+
+
+  
+  
+
+  
+
+  
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+</body>
+</html>

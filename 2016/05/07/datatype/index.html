@@ -42,7 +42,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="JS,JavaScript,基础知识,数据类型," />
+  <meta name="keywords" content="JS,基础知识,JavaScript,数据类型," />
 
 
 
@@ -72,7 +72,7 @@
 <meta property="og:image" content="https://segmentfault.com/img/bVlRSw">
 <meta property="og:image" content="https://segmentfault.com/img/bVlSaN">
 <meta property="og:image" content="https://segmentfault.com/img/bVlSc9">
-<meta property="og:updated_time" content="2017-03-02T09:56:49.000Z">
+<meta property="og:updated_time" content="2017-03-15T09:17:06.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript复习(二)数据类型">
 <meta name="twitter:description" content="ECMAScirpt 变量有两种不同的数据类型：基本类型，引用类型。也有其他的叫法，比如原始类型和对象类型。这些叫法都是依据这两种的类型特点来命名的。
@@ -131,7 +131,7 @@
   <div class="container one-collumn sidebar-position-right page-post-detail ">
     <div class="headband"></div>
     
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader" style="background-image: url('/images/bg3.jpg');">
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader" style="background-image: url('/images/code1.jpg');">
       <div class="header-inner"><a class="site-home" href="/">Mars' Blog</a>
 
 <div class="site-meta ">
@@ -216,9 +216,9 @@
       
         <a href="/tags/JS/" rel="tag" title="JS">JS</a>
       
-        <a href="/tags/JavaScript/" rel="tag" title="JavaScript">JavaScript</a>
-      
         <a href="/tags/基础知识/" rel="tag" title="基础知识">基础知识</a>
+      
+        <a href="/tags/JavaScript/" rel="tag" title="JavaScript">JavaScript</a>
       
         <a href="/tags/数据类型/" rel="tag" title="数据类型">数据类型</a>
       
@@ -313,7 +313,7 @@
 <h3 id="基本类型的比较是值的比较："><a href="#基本类型的比较是值的比较：" class="headerlink" title="基本类型的比较是值的比较："></a>基本类型的比较是值的比较：</h3><p>只有在它们的值相等的时候它们才相等。 但你可能会这样：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</div><div class="line"><span class="keyword">var</span> b = <span class="literal">true</span>;</div><div class="line"><span class="built_in">console</span>.log(a == b);<span class="comment">//true</span></div><div class="line"><span class="built_in">console</span>.log(a === b);<span class="comment">//false</span></div></pre></td></tr></table></figure></p>
 <p><code>==</code>比较两个不同类型的变量时会进行一些<code>类型转换</code>。像上面的比较先会把true转换为数字1再和数字1进行比较，结果就是true了。 这是当比较的两个值的类型不同的时候==运算符会进行<code>类型转换</code>，但是当两个值的类型相同的时候，即使是<code>==</code>也相当于是<code>===</code>。当<code>===</code>全等时不进行类型转换，1是<code>number</code>类型自然不全等于<code>布尔</code>类型的true了</p>
 <h3 id="基本类型的变量是存放在栈区的（栈区指内存里的栈内存）"><a href="#基本类型的变量是存放在栈区的（栈区指内存里的栈内存）" class="headerlink" title="基本类型的变量是存放在栈区的（栈区指内存里的栈内存）"></a>基本类型的变量是存放在栈区的（栈区指内存里的栈内存）</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a =<span class="number">20</span>;</div><div class="line"><span class="keyword">var</span> b =abc;</div><div class="line"><span class="keyword">var</span> c =truel;</div></pre></td></tr></table></figure>
-<p><img src="http://upload-images.jianshu.io/upload_images/599584-cce8e155e19593fb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="堆与栈"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/599584-cce8e155e19593fb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <h2 id="引用类型"><a href="#引用类型" class="headerlink" title="引用类型"></a>引用类型</h2><p><code>引用类型</code>也可以说是<code>对象</code>，对象是<code>属性</code>和<code>方法</code>的集合。也就是说引用类型可以拥有属性和方法，属性又可以包含<code>基本类型</code>和<code>引用类型</code>。来看看引用类型的一些特性：</p>
 <h3 id="引用类型的值是可变的"><a href="#引用类型的值是可变的" class="headerlink" title="引用类型的值是可变的"></a>引用类型的值是可变的</h3><p>我们可为为引用类型添加属性和方法，也可以删除其属性和方法，如：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> person = &#123;&#125;;<span class="comment">//创建个控对象 --引用类型</span></div><div class="line">person.name = <span class="string">'jay'</span>;</div><div class="line">person.age = <span class="number">24</span>;</div><div class="line">person.sayName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="built_in">console</span>.log(person.name);&#125; </div><div class="line">person.sayName();<span class="comment">// 'jay'</span></div><div class="line"></div><div class="line"><span class="keyword">delete</span> person.name; <span class="comment">//删除person对象的name属性</span></div><div class="line">person.sayName(); <span class="comment">// undefined</span></div></pre></td></tr></table></figure></p>
 <p>上面代码说明引用类型可以拥有属性和方法，并且是可以动态改变的。</p>
@@ -351,9 +351,9 @@
           
             <a href="/tags/JS/" rel="tag">#JS</a>
           
-            <a href="/tags/JavaScript/" rel="tag">#JavaScript</a>
-          
             <a href="/tags/基础知识/" rel="tag">#基础知识</a>
+          
+            <a href="/tags/JavaScript/" rel="tag">#JavaScript</a>
           
             <a href="/tags/数据类型/" rel="tag">#数据类型</a>
           
@@ -371,6 +371,10 @@
           </div>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/05/21/cookie/" rel="prev" title="这几天研究Cookie的小结">
+                这几天研究Cookie的小结 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -461,7 +465,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-count">12</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -478,7 +482,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">26</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

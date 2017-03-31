@@ -121,7 +121,7 @@
  ">
     <div class="headband"></div>
     
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader" style="background-image: url('/images/bg3.jpg');">
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader" style="background-image: url('/images/code1.jpg');">
       <div class="header-inner"><a class="site-home" href="/">Mars' Blog</a>
 
 <div class="site-meta ">
@@ -231,6 +231,930 @@
             
               
                 
+                <a class="post-title-link" href="/2017/01/03/vue-data-observe/" itemprop="url">
+                  Vue数据绑定和响应式原理
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2017-01-03T19:26:46+08:00" content="2017-01-03">
+              2017-01-03
+            </time>
+          </span>
+
+          
+
+          <!-- 
+            
+           -->
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>当实例化一个Vue构造函数，会执行 Vue 的 init 方法，在 init 方法中主要执行三部分内容，一是初始化环境变量，而是处理 Vue 组件数据，三是解析挂载组件。以上三部分内容构成了 Vue 的整个执行过程。</p>
+<p>Vue 实现了一个 <code>观察者-消费者(订阅者)</code> 模式来实现数据驱动视图。通过设定对象属性的 setter/getter 方法来监听数据的变化，而每个属性的 setter 方法就是一个观察者， 当属性变化将会向订阅者发送消息，从而驱动视图更新。</p>
+<p>Vue 的订阅者 watcher 实现在 <a href="https://github.com/vuejs/vue/blob/e9872271fa9b2a8bec1c42e65a2bb5c4df808eb2/src/watcher.js#L36">/src/watchr.js</a> 。构建一个 watcher 最重要的是 expOrFn 和 cb 两个参数，cb 是订阅者收到消息后需要执行的回调，一般来说这个回调都是视图指令的更新方法，从而达到视图的更新，但是这也不是必须的，订阅回调也可以是一个和任何无关的纯函数。一个订阅者最重要的是要知道自己订阅了什么，watcher 分析 expOrFn 的 getter 方法，从而间接获得订阅的对象属性。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/01/03/vue-data-observe/" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/11/12/self-bind/" itemprop="url">
+                  手写一个bind函数
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-11-12T18:11:11+08:00" content="2016-11-12">
+              2016-11-12
+            </time>
+          </span>
+
+          
+
+          <!-- 
+            
+           -->
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (!<span class="built_in">Function</span>.prototype.bind) &#123;</div><div class="line">  <span class="built_in">Function</span>.prototype.bind = <span class="function"><span class="keyword">function</span> (<span class="params">oThis</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="keyword">this</span> !== <span class="string">"function"</span>) &#123;</div><div class="line">  </div><div class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">TypeError</span>(<span class="string">"bind只支持函数调用！"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">var</span> aArgs = <span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>, <span class="number">1</span>), </div><div class="line">        fToBind = <span class="keyword">this</span>, </div><div class="line">        fNOP = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;,</div><div class="line">        fBound = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">          <span class="keyword">return</span> fToBind.apply(<span class="keyword">this</span> <span class="keyword">instanceof</span> fNOP</div><div class="line">                                 ? <span class="keyword">this</span></div><div class="line">                                 : oThis || <span class="keyword">this</span>,</div><div class="line">                               aArgs.concat(<span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>)));</div><div class="line">        &#125;;</div><div class="line"></div><div class="line">    fNOP.prototype = <span class="keyword">this</span>.prototype;</div><div class="line">    fBound.prototype = <span class="keyword">new</span> fNOP();</div><div class="line"></div><div class="line">    <span class="keyword">return</span> fBound;</div><div class="line">  &#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/11/06/closure/" itemprop="url">
+                  简单讲下什么是闭包
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-11-06T18:05:24+08:00" content="2016-11-06">
+              2016-11-06
+            </time>
+          </span>
+
+          
+
+          <!-- 
+            
+           -->
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="关于闭包的介绍"><a href="#关于闭包的介绍" class="headerlink" title="关于闭包的介绍"></a>关于闭包的介绍</h2><ul>
+<li><p>其实一直以来只知道怎么在代码中使用闭包，但是怎么去用一句话描述闭包，我还真说不清楚，其原因有几点：1、使用业务场景较复杂且灵活，很难用一句简单的描述语说清楚其概念；2、闭包用好了，你的代码量会提炼很多，减少你用很多的全局变量来污染全局空间；3、有效延长你定义的变量的作用周期，可以有效保存你的数据；</p>
+</li>
+<li><p>当然了说了这么多，是不是闭包就神乎其神了，其实也不是，任何东西对于我们学习来说，总有它的规律和规则的。闭包在代码中形式表现为：一个函数的函数体里面访问了全局空间或外围函数里面的变量，那么此时的这个函数跟该函数访问的那个变量所在的作用域就构成了我们所说的闭包。如：</p>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">var</span> a = <span class="number">15</span>;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> b = <span class="number">12</span> + a;</div><div class="line">	<span class="keyword">return</span> b;</div><div class="line">&#125;;</div><div class="line"><span class="comment">/*</span></div><div class="line">*此时的fn函数和a变量以及a变量所在的作用域就是一个闭包</div><div class="line">*/</div></pre></td></tr></table></figure>
+<p>所以说往简单了理解闭包你可以这样定义：如果一个函数的函数体里面牵扯到其他作用域（一般指外围或函数祖先级作用域）的变量，那么就称这个函数、引用的这个变量以及这个变量的作用环境合起来构建了一个闭包！说白了就是定义了一个“环境”。</p>
+<h2 id="为什么要使用闭包？"><a href="#为什么要使用闭包？" class="headerlink" title="为什么要使用闭包？"></a>为什么要使用闭包？</h2><ul>
+<li><p>1、减少全局空间全局变量的个数，降低命名空间污染</p>
+</li>
+<li><p>2、延长变量的作用周期</p>
+</li>
+<li><p>3、保存数据，防止数据“跟踪掉”</p>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/09/26/jssdk/" itemprop="url">
+                  看看怎么调用JSSDK？
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-09-26T18:02:07+08:00" content="2016-09-26">
+              2016-09-26
+            </time>
+          </span>
+
+          
+
+          <!-- 
+            
+           -->
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><ul>
+<li><p>需要准备什么：1、了解微信JSSDK说明文档，俗话说“工欲善其事，必先利其器”说的就是这个道理，所以你先了解下它的相关接口；2、下载微信web开发者工具，这个主要是用来调试的，它可以很好的把调用js某些api后出现的情况打印在控制台！</p>
+</li>
+<li><p>相关链接地址：<a href="https://mp.weixin.qq.com/wiki/7/aaa137b55fb2e0456bf8dd9148dd613f.html#.E6.AD.A5.E9.AA.A4.E5.9B.9B.EF.BC.9A.E9.80.9A.E8.BF.87ready.E6.8E.A5.E5.8F.A3.E5.A4.84.E7.90.86.E6.88.90.E5.8A.9F.E9.AA.8C.E8.AF.81">微信JSSDK说明文档</a> <a href="https://mp.weixin.qq.com/wiki/10/e5f772f4521da17fa0d7304f68b97d7e.html">微信web开发者工具</a></p>
+</li>
+</ul>
+<h2 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h2><ul>
+<li>很多在微信里面的web页面都有的功能就是分享当前页面到到朋友圈、qq微博等，我们就实现这样一个功能！1、把当前页面分享出去！2、最后再来隐藏相关菜单！整个前台代码在<a href="https://github.com/woai30231/webDevDetails/blob/master/10/demo.html">这里</a>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/09/26/jssdk/" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/08/22/webpack-config/" itemprop="url">
+                  前端自动工具webpack的配置
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-08-22T17:36:50+08:00" content="2016-08-22">
+              2016-08-22
+            </time>
+          </span>
+
+          
+
+          <!-- 
+            
+           -->
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>全局安装webpack</p>
+<pre><code>$ sudo cnpm install webpack -g
+</code></pre><p>进入 项目</p>
+<pre><code>$ cnpm init 
+$ cnpm install webpack --save-dev
+</code></pre><p>打包文件</p>
+<pre><code>$ webpack entry.js bundle.js
+</code></pre><p>webpack 会分析依赖的部分比如在name.js 写</p>
+<pre><code>module.exports = &quot;aotu&quot;;
+</code></pre><p>到出一个模块到entry.js</p>
+<pre><code>var name = require(&apos;./name&apos;);
+</code></pre><p>打包之后就会在生成的文件看到所依赖的模块。<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/08/22/webpack-config/" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/08/06/call-apply-bind/" itemprop="url">
+                  JS 中的call、apply、bind
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-08-06T17:32:37+08:00" content="2016-08-06">
+              2016-08-06
+            </time>
+          </span>
+
+          
+
+          <!-- 
+            
+           -->
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="apply、call用法的简单示例"><a href="#apply、call用法的简单示例" class="headerlink" title="apply、call用法的简单示例"></a>apply、call用法的简单示例</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">fruits</span>(<span class="params"></span>) </span>&#123;&#125;</div><div class="line"></div><div class="line">fruits.prototype = &#123;</div><div class="line">	<span class="attr">color</span>: <span class="string">"red"</span>,</div><div class="line">	<span class="attr">say</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">		<span class="built_in">console</span>.log(<span class="string">"My color is "</span> + <span class="keyword">this</span>.color);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> apple = <span class="keyword">new</span> fruits;</div><div class="line">apple.say();	<span class="comment">//My color is red</span></div><div class="line"></div><div class="line">banana = &#123;</div><div class="line">	<span class="attr">color</span>: <span class="string">"yellow"</span></div><div class="line">&#125;</div><div class="line">apple.say.call(banana);		<span class="comment">//My color is yellow</span></div><div class="line">apple.say.apply(banana);	<span class="comment">//My color is yellow</span></div></pre></td></tr></table></figure>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/08/06/call-apply-bind/" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/07/11/git-pic/" itemprop="url">
+                  图解Git
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-07-11T15:04:46+08:00" content="2016-07-11">
+              2016-07-11
+            </time>
+          </span>
+
+          
+
+          <!-- 
+            
+           -->
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>这是一篇在<a href="http://marklodato.github.io/visual-git-guide/index-zh-cn.html">原文</a>基础上演绎的文章。原作者 <a href="lodatom@gmail.com">Mark Lodato</a>，译者 <a href="ellrywych@gmail.com">wych</a>。原文采用<a href="https://creativecommons.org/licenses/by-nc-sa/3.0/us/">创用 CC 姓名标示-非商业性-相同方式分享 3.0 美国授权条款</a>授权。</p>
+</blockquote>
+<p>此页图解 git 中的最常用命令。如果你稍微理解 git 的工作原理，这篇文章能够让你理解的更透彻。</p>
+<h2 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h2><p><img src="http://marklodato.github.io/visual-git-guide/basic-usage.svg" alt="enter image description here"><br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/07/11/git-pic/" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/06/28/git-guide/" itemprop="url">
+                  Git指南
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-06-28T15:54:48+08:00" content="2016-06-28">
+              2016-06-28
+            </time>
+          </span>
+
+          
+
+          <!-- 
+            
+           -->
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="安装-Git"><a href="#安装-Git" class="headerlink" title="安装 Git"></a>安装 Git</h2><ul>
+<li><p>Mac 用户：Xcode Command Line Tools 自带 Git（<code>xcode-select --install</code>）</p>
+</li>
+<li><p>Linux 用户：<code>sudo apt-get install git</code></p>
+</li>
+<li><p>Windows 用户：下载 <a href="git-for-windows.github.io">Git SCM</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">- 对于 Windows 用户，安装后如果希望在全局的 cmd 中使用 Git，需要把 git.exe 加入 PATH 环境变量中，或在 Git Bash 中使用 Git。</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="检出仓库"><a href="#检出仓库" class="headerlink" title="检出仓库"></a>检出仓库</h2><p>执行如下命令以创建一个本地仓库的克隆版本：</p>
+<p><code>git clone /path/to/repository</code></p>
+<p>如果是远端服务器上的仓库，你的命令会是这个样子：</p>
+<p><code>git clone username@host:/path/to/repository</code> （通过 SSH）</p>
+<p>或者：</p>
+<p><code>git clone https:/path/to/repository.git</code> （通过 https）</p>
+<p>比如说 <code>git clone https://github.com/geeeeeeeeek/git-recipes.git</code> 可以将 git 教程 clone 到你指定的目录。</p>
+<h2 id="创建新仓库"><a href="#创建新仓库" class="headerlink" title="创建新仓库"></a>创建新仓库</h2><p>创建新文件夹，打开，然后执行 <code>git init</code> 以创建新的 git 仓库。<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/06/28/git-guide/" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/05/21/cookie/" itemprop="url">
+                  这几天研究Cookie的小结
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-05-21T17:10:20+08:00" content="2016-05-21">
+              2016-05-21
+            </time>
+          </span>
+
+          
+
+          <!-- 
+            
+           -->
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>前几天公司业务中频频遇到cookie的问题，比如跨域。细细一查才发现自己对cookie真的只是一知半解，这里对之前几天对cookie的学习做一个总结，旨在给自己加深一下印象。</p>
+</blockquote>
+<h1 id="什么是cookie？"><a href="#什么是cookie？" class="headerlink" title="什么是cookie？"></a>什么是cookie？</h1><hr>
+<p>由于<code>HTTP</code>是一种<code>无状态</code>的协议，服务器单从网络连接上无从知道客户身份。怎么办呢？就给客户端们颁发一个通行证，每人一个，无论谁访问都必须携带自己通行证。这样服务器就能从通行证上确认客户身份了。这时候<code>cookie</code>就诞生了，简单来说，<code>cookie</code>其实就是服务器保存在浏览器的一小段文本信息。</p>
+<h1 id="cookie的特性"><a href="#cookie的特性" class="headerlink" title="cookie的特性"></a>cookie的特性</h1><h2 id="cookie有哪些属性？"><a href="#cookie有哪些属性？" class="headerlink" title="cookie有哪些属性？"></a>cookie有哪些属性？</h2><p>下面是我们在chrome开发者工具查看cookie的方式，标红处是他所具有的属性。</p>
+<p><img src="/images/chrome_cookie.jpg" alt=""></p>
+<ul>
+<li>name<br>该Cookie的名称，一旦创建，名称便不可更改</li>
+<li>value<br>该Cookie的值，如果值为Unicode字符，需要为字符编码,如果值为二进制数据，则需要使用BASE64编码</li>
+</ul>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/05/21/cookie/" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/05/07/datatype/" itemprop="url">
                   JavaScript复习(二)数据类型
                 </a>
@@ -310,241 +1234,13 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/04/29/var/" itemprop="url">
-                  JavaScript复习(一)变量
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-04-29T14:35:54+08:00" content="2016-04-29">
-              2016-04-29
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
-                    <span itemprop="name">JavaScript</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          <!-- 
-            
-           -->
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>进入工作，越发感觉原生<code>JavaScript</code>对于一名前端开发的重要性。各种<code>前端框架</code>、<code>工具</code>什么的，一天一个样，让人眼花缭乱。但是就算变化再多，底层依然是原生<code>JS</code>实现的。学好<code>JS</code>，上手这些新东西，就没有多高的难度了。深感自己<code>JavaScript</code>还有很多坑要填，这里再重新系统地学习一遍<code>JavaScript</code>，一周一篇，毕竟自己不是那么有恒心的人，希望自己能坚持下去！</p>
-<h2 id="关于JavaScript"><a href="#关于JavaScript" class="headerlink" title="关于JavaScript"></a>关于JavaScript</h2><h3 id="什么是JS"><a href="#什么是JS" class="headerlink" title="什么是JS?"></a>什么是JS?</h3><p>很多人天天用<code>JavaScript</code>，却对于什么是<code>JavaScript</code>都不太清楚，作为前端开发工作者就太不应该了~<br>简单地说<code>JavaScript</code>是一门轻量级的脚本语言，浏览器充当解释器。比如Chrome的<code>V8</code>引擎就是目前主流的<code>JS</code>解释器。<br><code>JS</code>执行时，在同一个作用域内是先解释再执行。解释的时候会编译<code>function</code>和<code>var</code>这两个关键词定义的变量，编译完成后从上往下执行并向变量赋值。</p>
-<blockquote>
-<p>关于<code>JavaScript</code>是如何诞生的，可以参考阮一峰的网络日志<a href="http://www.ruanyifeng.com/blog/2011/06/birth_of_javascript.html">Javascript诞生记</a>。</p>
-</blockquote>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/04/29/var/" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/04/24/hello-world/" itemprop="url">
-                  Hello，World！
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-04-24T18:46:45+08:00" content="2016-04-24">
-              2016-04-24
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
-                    <span itemprop="name">JavaScript</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          <!-- 
-            
-           -->
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Hello，World！"><a href="#Hello，World！" class="headerlink" title="Hello，World！"></a>Hello，World！</h1><img src="/images/code.jpg">
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
 
           
           </div>
@@ -583,7 +1279,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-count">12</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -600,7 +1296,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">26</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
